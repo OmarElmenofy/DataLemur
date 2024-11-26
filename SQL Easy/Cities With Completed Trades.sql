@@ -1,6 +1,9 @@
-SELECT u.city, count ( t.quantity) total_orders
-from users u join trades t on u.user_id = t.user_id
-where t.status = 'Completed'
-group by u.city
-order by total_orders DESC
-limit 3;
+SELECT 
+    u.city,
+    COUNT(t.order_id) AS completed_orders
+FROM trades t
+JOIN users u
+ON t.user_id = u.user_id
+WHERE t.status = 'Completed'
+GROUP BY u.city
+ORDER BY completed_orders DESC
